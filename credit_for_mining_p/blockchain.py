@@ -163,7 +163,7 @@ class Blockchain(object):
         guess_hash = hashlib.sha256(guess).hexdigest()
 
         # TODO: Change back to six zeroes
-        return guess_hash[:3] == "000"
+        return guess_hash[:6] == "000000"
 
     def valid_chain(self, chain):
         """
@@ -229,6 +229,7 @@ def mine():
     values = request.get_json()
 
     submitted_proof = values['proof']
+    recipient_id = values.get('recipient_id')
 
     if not blockchain.valid_proof(last_block_string, submitted_proof):
         response = {
@@ -244,7 +245,7 @@ def mine():
     # The amount is 1 coin as a reward for mining the next block
     blockchain.new_transaction(
         sender="0",
-        recipient=node_identifier,
+        recipient=recipient_id,
         amount=1,
     )
 
