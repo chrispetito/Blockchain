@@ -69,6 +69,11 @@ if __name__ == '__main__':
         # TODO: We're going to have to research how to do a POST in Python
         # HINT: Research `requests` and remember we're sending our data as JSON
         # TODO: If the server responds with 'New Block Forged'
+        if data['message'] == 'New Block Forged':
+            coins_mined +=1
+            print(f'Coins Mined: {coins_mined}')
+        else:
+            print(data['message'])
 
         # add 1 to the number of coins mined and print it.  Otherwise,
         # print the message from the server.
