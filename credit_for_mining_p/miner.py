@@ -9,6 +9,8 @@ import sys
 
 import json
 
+from uuid import uuid4
+
 
 # TODO: Implement functionality to search for a proof 
 
@@ -45,6 +47,19 @@ def valid_proof(block_string, proof):
 
     # TODO: Change back to six zeroes
     return guess_hash[:6] == "000000"
+
+def get_id():
+    id_file = open('my_id.text', 'r')
+
+    id = id_file.read()
+    if len(id) > 0:
+        return id
+    else:
+        file = open('my_id.text', 'w')
+        file.write(str(uuid4()).replace('-', ''))
+        file = open('my_id.text', 'r')
+        id = file.read()
+        return id
 
 
 if __name__ == '__main__':
